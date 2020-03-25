@@ -7,11 +7,10 @@ apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
 group = "com.sbrati"
-version = "0.0.1"
+version = "2.0.0"
 
 repositories {
     jcenter()
-    mavenLocal()
 }
 
 dependencies {
@@ -34,11 +33,18 @@ dependencies {
     testImplementation "org.testcontainers:postgresql:1.12.5"
 }
 
-def imageName = "${project.properties["sbraticomDockerBaseImageName"].toString()}/${project.name}"
+def gcpProjectId = project.properties["gcpProjectId"].toString()
+def gcpImageName = "eu.gcr.io/${gcpProjectId}/${project.name}"
+def sbratiImageName = "${project.properties["sbraticomDockerBaseImageName"].toString()}/${project.name}"
 docker {
     springBootApplication {
-        baseImage = 'openjdk:8-alpine'
-        images = ["${imageName}:${project.version}", "${imageName}:latest"]
-        jvmArgs = ["-Dspring.profiles.active=production", "-Xmx2048m"]
+        baseImage = 'openjdk:11-jdk-slim'
+        images = [
+                "${gcpImageName}:${project.version}",
+                "${gcpImageName}:latest",
+                "${sbratiImageName}:${project.version}",
+                "${sbratiImageName}:latest"
+        ]
+        jvmArgs = ["-Xmx1024m"]
     }
 }

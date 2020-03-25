@@ -1,10 +1,10 @@
 ---
 spring:
   application:
-    name: rastibot-user-reminder-service
+    name: rastibot-user-service
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL}/${DATASOURCE_DBNAME}
-    username: ${DATASOURCE_USERNAME}
+    username: rastibot-user-service
     password: ${DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   flyway:
@@ -16,4 +16,4 @@ spring:
       hibernate.temp.use_jdbc_metadata_defaults: false
 
 server:
-  port: 9293
+  port: 9294

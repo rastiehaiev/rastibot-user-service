@@ -37,6 +37,9 @@ public class UserService {
             entity.setChatId(user.getChatId());
         }
         entity.setLocale(user.getLocale());
+        entity.setUsername(user.getUsername());
+        entity.setFirstName(user.getFirstName());
+        entity.setLastName(user.getLastName());
         userRepository.save(entity);
     }
 }
