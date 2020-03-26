@@ -42,4 +42,8 @@ public class UserService {
         entity.setLastName(user.getLastName());
         userRepository.save(entity);
     }
+
+    public Long count() {
+        return userRepository.count();
+    }
 }

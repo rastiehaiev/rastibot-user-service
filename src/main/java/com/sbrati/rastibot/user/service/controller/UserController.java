@@ -25,6 +25,11 @@ public class UserController {
         userService.createOrUpdate(user);
     }
 
+    @GetMapping(value = "/count")
+    public Long countAllUsers() {
+        return userService.count();
+    }
+
     @ExceptionHandler(value = ResourceAlreadyExistsException.class)
     public ResponseEntity<?> handleResourceAlreadyExistsException() {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
