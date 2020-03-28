@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -25,9 +27,19 @@ public class UserController {
         userService.createOrUpdate(user);
     }
 
+    @PutMapping(value = "/chat/{chatId}/awareness")
+    public void setAwareness(@PathVariable("chatId") Long chatId, @RequestParam("awareness") Integer awareness) {
+        userService.setAwareness(chatId, awareness);
+    }
+
     @GetMapping(value = "/count")
     public Long countAllUsers() {
         return userService.count();
+    }
+
+    @GetMapping(value = "/uninformed")
+    public List<Long> findUninformedUserIds(@RequestParam("awareness") Integer awareness) {
+        return userService.findByAwarenessLessThan(awareness);
     }
 
     @ExceptionHandler(value = ResourceAlreadyExistsException.class)

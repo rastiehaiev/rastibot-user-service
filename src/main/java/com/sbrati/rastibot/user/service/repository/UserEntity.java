@@ -26,4 +26,7 @@ public class UserEntity {
 
     @Column(name = "locale")
     private String locale;
+
+    @Column(name = "awareness")
+    private Integer awareness;
 }
