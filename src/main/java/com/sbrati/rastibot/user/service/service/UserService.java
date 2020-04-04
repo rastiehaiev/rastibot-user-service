@@ -32,9 +32,9 @@ public class UserService {
 
     @Transactional
     public void createOrUpdate(User user) {
-        log.info("Creating user {}.", user);
         UserEntity entity = userRepository.findByChatId(user.getChatId());
         if (entity == null) {
+            log.info("Creating user {}.", user);
             entity = new UserEntity();
             entity.setChatId(user.getChatId());
         }
