@@ -60,4 +60,8 @@ public class UserService {
     public void setAwareness(long chatId, int awareness) {
         userRepository.setAwareness(chatId, awareness);
     }
+
+    public List<Long> getAllChatIds() {
+        return userRepository.getAllChatIds();
+    }
 }

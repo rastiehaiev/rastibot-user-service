@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Modifying
     @Query(value = "UPDATE user_table SET awareness = :awareness WHERE chat_id = :chatId")
     void setAwareness(@Param("chatId") long chatId, @Param("awareness") int awareness);
+
+    @Query(value = "SELECT chat_id FROM user_table", nativeQuery = true)
+    List<Long> getAllChatIds();
 }

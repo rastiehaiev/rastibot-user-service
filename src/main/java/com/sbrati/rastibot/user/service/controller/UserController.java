@@ -37,6 +37,11 @@ public class UserController {
         return userService.count();
     }
 
+    @GetMapping(value = "/chat_ids")
+    public List<Long> getAllChatIds() {
+        return userService.getAllChatIds();
+    }
+
     @GetMapping(value = "/uninformed")
     public List<Long> findUninformedUserIds(@RequestParam("awareness") Integer awareness) {
         return userService.findByAwarenessLessThan(awareness);
