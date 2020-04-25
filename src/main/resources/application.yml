@@ -15,5 +15,11 @@ spring:
     properties:
       hibernate.temp.use_jdbc_metadata_defaults: false
 
+logging:
+  config: classpath:com/sbrati/logging/gcp/logging-config.xml
+  level:
+    root: INFO
+    com.sbrati: INFO
+
 server:
   port: 9294
