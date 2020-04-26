@@ -2,6 +2,8 @@
 spring:
   application:
     name: rastibot-user-service
+  main:
+    banner-mode: off
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL}/${DATASOURCE_DBNAME}
     username: rastibot-user-service
@@ -16,7 +18,7 @@ spring:
       hibernate.temp.use_jdbc_metadata_defaults: false
 
 logging:
-  config: classpath:com/sbrati/logging/gcp/logging-config.xml
+  config: ${LOGGING_CONFIG}
   level:
     root: INFO
     com.sbrati: INFO
