@@ -13,12 +13,18 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     UserEntity findByChatId(long chatId);
 
-    List<UserEntity> findByAwarenessNullOrAwarenessLessThan(int awareness);
+    List<UserEntity> findByInactiveFalseAndAwarenessNullOrAwarenessLessThan(int awareness);
+
+    Long countAllByInactiveFalse();
 
     @Modifying
     @Query(value = "UPDATE user_table SET awareness = :awareness WHERE chat_id = :chatId")
     void setAwareness(@Param("chatId") long chatId, @Param("awareness") int awareness);
 
-    @Query(value = "SELECT chat_id FROM user_table", nativeQuery = true)
-    List<Long> getAllChatIds();
+    @Modifying
+    @Query(value = "UPDATE user_table SET inactive = TRUE WHERE chat_id = :chatId")
+    void setInactive(@Param("chatId") long chatId);
+
+    @Query(value = "SELECT chat_id FROM user_table WHERE inactive = FALSE", nativeQuery = true)
+    List<Long> getActiveChatIds();
 }

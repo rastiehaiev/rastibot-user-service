@@ -2,6 +2,7 @@ package com.sbrati.rastibot.user.service.controller;
 
 import com.sbrati.rastibot.user.service.exception.ResourceAlreadyExistsException;
 import com.sbrati.rastibot.user.service.model.User;
+import com.sbrati.rastibot.user.service.model.UserStatistics;
 import com.sbrati.rastibot.user.service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,9 +33,21 @@ public class UserController {
         userService.setAwareness(chatId, awareness);
     }
 
+    @PutMapping(value = "/chat/{chatId}/inactivity")
+    public void markAsInactive(@PathVariable("chatId") Long chatId) {
+        userService.markAsInactive(chatId);
+    }
+
     @GetMapping(value = "/count")
     public Long countAllUsers() {
-        return userService.count();
+        return userService.countAll();
+    }
+
+    @GetMapping(value = "/stats")
+    public UserStatistics stats() {
+        int total = userService.countAll().intValue();
+        int active = userService.countActive().intValue();
+        return new UserStatistics(total, active);
     }
 
     @GetMapping(value = "/chat_ids")

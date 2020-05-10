@@ -29,4 +29,7 @@ public class UserEntity {
 
     @Column(name = "awareness")
     private Integer awareness;
+
+    @Column(name = "inactive")
+    private boolean inactive;
 }
